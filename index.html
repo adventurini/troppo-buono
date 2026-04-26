@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Troppo Buono — Business Plan</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Barlow+Condensed:wght@300;400;600;700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #C8102E;
+    --gold: #8B6914;
+    --gold-light: #C9A84C;
+    --dark: #111111;
+    --mid: #444444;
+    --bg: #FFFFFF;
+    --bg2: #F7F6F4;
+    --bg3: #EEEDE9;
+    --border: #D4D0C8;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--dark); font-family: 'Barlow', sans-serif; }
+
+  /* TOP BAR */
+  .topbar {
+    background: #111;
+    padding: 18px 40px;
+    display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: 100;
+  }
+  .brand-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; font-weight: 900;
+    letter-spacing: 2px; text-transform: uppercase; color: #fff;
+  }
+  .brand-sub {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px; letter-spacing: 3px;
+    color: var(--gold-light); text-transform: uppercase; margin-top: 2px;
+  }
+  .doc-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px; letter-spacing: 3px;
+    color: rgba(255,255,255,0.4); text-transform: uppercase;
+  }
+
+  /* HERO */
+  .hero {
+    background: #111;
+    padding: 64px 60px 56px;
+    border-bottom: 4px solid var(--red);
+  }
+  .hero-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px; letter-spacing: 4px;
+    color: var(--gold-light); text-transform: uppercase; margin-bottom: 18px;
+  }
+  .hero-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(52px, 8vw, 88px);
+    font-weight: 900; line-height: 0.95;
+    text-transform: uppercase; letter-spacing: 2px; color: #fff;
+  }
+  .hero-title em { font-style: italic; color: var(--gold-light); }
+  .hero-tagline {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 16px; letter-spacing: 3px;
+    color: rgba(255,255,255,0.55); text-transform: uppercase; margin-top: 16px;
+  }
+  .hero-address {
+    font-family: 'Barlow', sans-serif;
+    font-size: 13px; color: var(--gold-light); margin-top: 20px; letter-spacing: 1px;
+  }
+
+  /* STATS BAR */
+  .stats-bar {
+    background: var(--red);
+    padding: 22px 60px;
+    display: flex; gap: 0; flex-wrap: wrap;
+  }
+  .stat {
+    flex: 1; min-width: 130px;
+    padding-right: 30px; margin-right: 30px;
+    border-right: 1px solid rgba(255,255,255,0.25);
+  }
+  .stat:last-child { border-right: none; margin-right: 0; }
+  .stat-val {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px; font-weight: 700; color: #fff; line-height: 1;
+  }
+  .stat-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px; letter-spacing: 2px;
+    text-transform: uppercase; color: rgba(255,255,255,0.75); margin-top: 4px;
+  }
+
+  /* NAV GRID */
+  .nav-grid {
+    padding: 48px 60px;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1px;
+    background: var(--border);
+  }
+  .nav-card {
+    background: var(--bg);
+    padding: 36px 32px;
+    text-decoration: none; color: var(--dark);
+    display: block; position: relative; overflow: hidden;
+    transition: background 0.15s;
+  }
+  .nav-card:hover { background: var(--bg2); }
+  .nav-card::before {
+    content: '';
+    position: absolute; left: 0; top: 0; bottom: 0; width: 3px;
+    background: var(--red);
+    transform: scaleY(0); transition: transform 0.2s; transform-origin: bottom;
+  }
+  .nav-card:hover::before { transform: scaleY(1); }
+  .card-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px; letter-spacing: 3px;
+    color: var(--gold); text-transform: uppercase; margin-bottom: 12px;
+  }
+  .card-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; font-weight: 700;
+    color: var(--dark); margin-bottom: 10px; line-height: 1.2;
+  }
+  .card-desc {
+    font-family: 'Barlow', sans-serif;
+    font-size: 13px; color: #666; line-height: 1.6;
+  }
+  .card-arrow {
+    position: absolute; bottom: 28px; right: 28px;
+    font-size: 18px; color: var(--red);
+    opacity: 0; transition: opacity 0.2s, transform 0.2s;
+  }
+  .nav-card:hover .card-arrow { opacity: 1; transform: translateX(4px); }
+
+  .footer {
+    background: #111;
+    padding: 28px 60px;
+    display: flex; justify-content: space-between; align-items: center;
+  }
+  .footer-text {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px; letter-spacing: 2px;
+    color: rgba(255,255,255,0.3); text-transform: uppercase;
+  }
+
+  @media (max-width: 600px) {
+    .topbar { padding: 16px 20px; }
+    .hero { padding: 48px 24px 40px; }
+    .stats-bar { padding: 18px 24px; gap: 16px; }
+    .stat { border-right: none; margin-right: 0; min-width: 44%; }
+    .nav-grid { padding: 0; grid-template-columns: 1fr; }
+    .footer { padding: 24px 20px; flex-direction: column; gap: 8px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div>
+    <div class="brand-name">Troppo Buono</div>
+    <div class="brand-sub">It's Too Good.</div>
+  </div>
+  <div class="doc-label">Confidential Business Plan · 2026</div>
+</div>
+
+<div class="hero">
+  <div class="hero-eyebrow">Investment Opportunity — Shelby Township, Michigan</div>
+  <div class="hero-title">Troppo<br><em>Buono</em></div>
+  <div class="hero-tagline">New York–Style Thin Crust Pizzeria &amp; Full Bar</div>
+  <div class="hero-address">50285 Mound Road · Shelby Township, MI 48317</div>
+</div>
+
+<div class="stats-bar">
+  <div class="stat"><div class="stat-val">$1.37M</div><div class="stat-label">Total Project Cost</div></div>
+  <div class="stat"><div class="stat-val">$137K</div><div class="stat-label">Equity Sought</div></div>
+  <div class="stat"><div class="stat-val">$1M+</div><div class="stat-label">Target Revenue Yr 1</div></div>
+  <div class="stat"><div class="stat-val">4.5x</div><div class="stat-label">DSCR Year 2</div></div>
+  <div class="stat"><div class="stat-val">4,043</div><div class="stat-label">Square Feet</div></div>
+</div>
+
+<div class="nav-grid">
+  <a href="01-executive-summary.html" class="nav-card">
+    <div class="card-num">Section 01</div>
+    <div class="card-title">Executive Summary</div>
+    <div class="card-desc">The deal, the concept, and the ask — in under two minutes.</div>
+    <div class="card-arrow">→</div>
+  </a>
+  <a href="02-property-deal.html" class="nav-card">
+    <div class="card-num">Section 02</div>
+    <div class="card-title">Property &amp; Deal Structure</div>
+    <div class="card-desc">50285 Mound Rd, purchase price, TI, SBA 7(a) structure, and equity ask.</div>
+    <div class="card-arrow">→</div>
+  </a>
+  <a href="03-brand-concept.html" class="nav-card">
+    <div class="card-num">Section 03</div>
+    <div class="card-title">Brand &amp; Concept</div>
+    <div class="card-desc">Second-generation operator. Proven product. Scalable brand identity.</div>
+    <div class="card-arrow">→</div>
+  </a>
+  <a href="04-market.html" class="nav-card">
+    <div class="card-num">Section 04</div>
+    <div class="card-title">Market &amp; Location</div>
+    <div class="card-desc">Shelby Township demographics, Mound Road corridor, competitive positioning.</div>
+    <div class="card-arrow">→</div>
+  </a>
+  <a href="05-operations.html" class="nav-card">
+    <div class="card-num">Section 05</div>
+    <div class="card-title">Operations Plan</div>
+    <div class="card-desc">Hours, staffing model, prime cost targets, and kitchen production capacity.</div>
+    <div class="card-arrow">→</div>
+  </a>
+  <a href="06-financials.html" class="nav-card">
+    <div class="card-num">Section 06</div>
+    <div class="card-title">Financial Projections</div>
+    <div class="card-desc">3-year P&amp;L, DSCR, break-even analysis, and revenue model assumptions.</div>
+    <div class="card-arrow">→</div>
+  </a>
+  <a href="07-owner.html" class="nav-card">
+    <div class="card-num">Section 07</div>
+    <div class="card-title">Owner &amp; Management</div>
+    <div class="card-desc">Bart Basilico's background, food truck track record, and transition plan.</div>
+    <div class="card-arrow">→</div>
+  </a>
+  <a href="08-vision.html" class="nav-card">
+    <div class="card-num">Section 08</div>
+    <div class="card-title">Long-Term Vision</div>
+    <div class="card-desc">Exit multiples, expansion opportunities, and brand equity upside.</div>
+    <div class="card-arrow">→</div>
+  </a>
+  <a href="menu.html" class="nav-card">
+    <div class="card-num">The Menu</div>
+    <div class="card-title">Full Menu &amp; Pricing</div>
+    <div class="card-desc">Pizzas, starters, salads, bar, wine, beer, and dessert — with pricing and food cost strategy.</div>
+    <div class="card-arrow">→</div>
+  </a>
+</div>
+
+<div class="footer">
+  <div class="footer-text">Troppo Buono · Confidential · Not for Distribution</div>
+  <div class="footer-text">Prepared 2026 · Shelby Township, MI</div>
+</div>
+
+</body>
+</html>

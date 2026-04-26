@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>02 · Property &amp; Deal — Troppo Buono</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Barlow+Condensed:wght@300;400;600;700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --red:#C8102E; --gold:#8B6914; --gold-l:#B8912A; --dark:#111; --mid:#333; --bg:#fff; --bg2:#F7F6F3; --border:#D4D0C8; --border-s:#B0AA9E; }
+  * { margin:0; padding:0; box-sizing:border-box; }
+  body { background:#fff; color:#111; font-family:'Barlow',sans-serif; }
+  .topbar { background:#111; padding:16px 40px; display:flex; align-items:center; justify-content:space-between; position:sticky; top:0; z-index:100; }
+  .back-link { font-family:'Barlow Condensed',sans-serif; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:#C9A84C; text-decoration:none; }
+  .back-link:hover { color:#fff; }
+  .section-id { font-family:'Barlow Condensed',sans-serif; font-size:11px; letter-spacing:3px; text-transform:uppercase; color:rgba(255,255,255,0.4); }
+  .page { max-width:900px; margin:0 auto; padding:72px 40px; }
+  .section-label { font-family:'Barlow Condensed',sans-serif; font-size:11px; letter-spacing:4px; text-transform:uppercase; color:var(--gold); margin-bottom:18px; }
+  h1 { font-family:'Playfair Display',serif; font-size:clamp(38px,6vw,60px); font-weight:900; line-height:1; text-transform:uppercase; color:#111; margin-bottom:36px; }
+  h1 em { font-style:italic; color:var(--gold); }
+  h2 { font-family:'Playfair Display',serif; font-size:24px; font-weight:700; color:#111; margin-bottom:16px; margin-top:48px; }
+  h2:first-of-type { margin-top:0; }
+  p { font-size:15px; line-height:1.8; color:#333; margin-bottom:16px; }
+  strong { color:#111; }
+  .divider { border:none; border-top:1px solid var(--border); margin:48px 0; }
+  .lead { font-size:17px; line-height:1.75; color:#1a1a1a; border-left:3px solid var(--red); padding-left:22px; margin-bottom:56px; }
+
+  .fact-grid { display:grid; grid-template-columns:1fr 1fr; gap:0; background:var(--border); margin:32px 0; }
+  .fact { background:#fff; padding:16px 20px; display:flex; justify-content:space-between; align-items:baseline; gap:12px; }
+  .fact-key { font-family:'Barlow Condensed',sans-serif; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:#888; white-space:nowrap; }
+  .fact-val { font-size:14px; font-weight:500; color:#111; text-align:right; }
+
+  table { width:100%; border-collapse:collapse; margin:20px 0 36px; }
+  thead th { font-family:'Barlow Condensed',sans-serif; font-size:10px; letter-spacing:2px; text-transform:uppercase; color:var(--gold); text-align:left; padding:11px 14px; border-bottom:2px solid var(--border-s); background:var(--bg2); }
+  thead th:last-child { text-align:right; }
+  tbody td { padding:12px 14px; font-size:14px; color:#333; border-bottom:1px solid var(--border); }
+  tbody td:last-child { text-align:right; }
+  tr.total td { font-weight:700; color:#111; font-size:15px; border-top:2px solid var(--border-s); border-bottom:none; background:var(--bg2); }
+
+  .callout { background:#FEF5F6; border:1px solid #F0C0C5; border-left:4px solid var(--red); padding:30px 34px; margin:44px 0; }
+  .callout p { color:#222; margin-bottom:8px; }
+  .callout-title { font-family:'Barlow Condensed',sans-serif; font-size:10px; letter-spacing:3px; text-transform:uppercase; color:var(--red); margin-bottom:14px; }
+
+  .advantage-list { list-style:none; margin:20px 0; }
+  .advantage-list li { padding:13px 0 13px 26px; position:relative; font-size:15px; color:#333; border-bottom:1px solid var(--border); line-height:1.6; }
+  .advantage-list li::before { content:'✓'; position:absolute; left:0; color:var(--gold); font-weight:700; }
+
+  .nav-footer { margin-top:80px; padding-top:36px; border-top:1px solid var(--border); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
+  .nav-btn { font-family:'Barlow Condensed',sans-serif; font-size:12px; letter-spacing:3px; text-transform:uppercase; text-decoration:none; padding:13px 26px; border:1px solid var(--border-s); color:var(--gold); transition:all 0.2s; display:inline-block; }
+  .nav-btn:hover { background:var(--gold); color:#fff; border-color:var(--gold); }
+  .nav-btn.primary { background:var(--red); color:#fff; border-color:var(--red); }
+  .nav-btn.primary:hover { background:#a00c24; }
+
+  @media(max-width:600px){ .topbar{padding:14px 20px;} .page{padding:48px 20px;} .fact-grid{grid-template-columns:1fr;} }
+</style>
+</head>
+<body>
+<div class="topbar">
+  <a href="index.html" class="back-link">← Back to Overview</a>
+  <div class="section-id">Section 02 · Property &amp; Deal Structure</div>
+</div>
+<div class="page">
+  <div class="section-label">Section 02 — Property &amp; Deal Structure</div>
+  <h1>The <em>Property</em></h1>
+  <div class="lead">50285 Mound Road is a 4,043 SF freestanding commercial building on 1.59 acres in Shelby Township — fully equipped as a restaurant with existing kitchen infrastructure, bar, outdoor patio, and fire suppression. We are buying real estate, not signing a lease.</div>
+
+  <h2>Property Facts</h2>
+  <div class="fact-grid">
+    <div class="fact"><span class="fact-key">Address</span><span class="fact-val">50285 Mound Rd, Shelby Twp MI</span></div>
+    <div class="fact"><span class="fact-key">Asking Price</span><span class="fact-val">$1,070,000</span></div>
+    <div class="fact"><span class="fact-key">Building Size</span><span class="fact-val">4,043 SF</span></div>
+    <div class="fact"><span class="fact-key">Lot Size</span><span class="fact-val">1.59 Acres</span></div>
+    <div class="fact"><span class="fact-key">Year Built</span><span class="fact-val">1976</span></div>
+    <div class="fact"><span class="fact-key">Zoning</span><span class="fact-val">Commercial</span></div>
+    <div class="fact"><span class="fact-key">Current Use</span><span class="fact-val">Esplendido Restaurant</span></div>
+    <div class="fact"><span class="fact-key">Infrastructure</span><span class="fact-val">Kitchen, Bar, Patio, Fire Suppression</span></div>
+  </div>
+  <p>The property is currently operating as Esplendido Mexican Restaurant. Existing restaurant infrastructure — grease traps, hood systems, fire suppression, bar build-out — dramatically reduces buildout cost and timeline. We are starting with bones, not a blank slate.</p>
+
+  <hr class="divider">
+  <h2>Why Buying Beats Leasing</h2>
+  <ul class="advantage-list">
+    <li>Property equity accumulates alongside operating income — two wealth-building engines, not one</li>
+    <li>No rent escalations, no lease renewal risk, no landlord leverage</li>
+    <li>Fixed debt service is predictable; occupancy cost locked for the 10-year loan term</li>
+    <li>Exit optionality: sell the business, sell the real estate, or both</li>
+    <li>Restaurant businesses sell at 2.5–3.5x EBITDA separate from real estate appreciation</li>
+  </ul>
+
+  <hr class="divider">
+  <h2>Deal Structure</h2>
+  <table>
+    <thead><tr><th>Use of Funds</th><th>Amount</th></tr></thead>
+    <tbody>
+      <tr><td>Property Purchase</td><td>$1,070,000</td></tr>
+      <tr><td>Tenant Improvements &amp; Buildout</td><td>$300,000</td></tr>
+      <tr class="total"><td>Total Project Cost</td><td>$1,370,000</td></tr>
+    </tbody>
+  </table>
+
+  <table>
+    <thead><tr><th>Capital Source</th><th>Amount</th></tr></thead>
+    <tbody>
+      <tr><td>SBA 7(a) Commercial Loan (~90% LTV)</td><td>~$1,233,000</td></tr>
+      <tr class="total"><td>Equity Sought (Down Payment)</td><td>~$137,000</td></tr>
+    </tbody>
+  </table>
+
+  <div class="callout">
+    <div class="callout-title">The Ask in Plain Language</div>
+    <p>We are raising the SBA down payment. The loan covers the rest. Investors receive an ownership stake in Troppo Buono, LLC — participating in cash flow distributions and enterprise value at exit. Terms structured formally with legal counsel prior to close.</p>
+  </div>
+
+  <h2>TI Budget — $300,000</h2>
+  <table>
+    <thead><tr><th>Category</th><th>Budget</th></tr></thead>
+    <tbody>
+      <tr><td>Interior Renovation &amp; Brand Build-Out</td><td>$120,000</td></tr>
+      <tr><td>Kitchen Equipment Upgrades</td><td>$60,000</td></tr>
+      <tr><td>Bar Renovation &amp; Equipment</td><td>$35,000</td></tr>
+      <tr><td>Furniture, Fixtures &amp; Signage</td><td>$40,000</td></tr>
+      <tr><td>POS, Tech &amp; Security</td><td>$8,000</td></tr>
+      <tr><td>Licenses, Permits &amp; Legal</td><td>$12,000</td></tr>
+      <tr><td>Opening Inventory</td><td>$10,000</td></tr>
+      <tr><td>Marketing &amp; Grand Opening</td><td>$8,000</td></tr>
+      <tr><td>Working Capital Reserve</td><td>$7,000</td></tr>
+      <tr class="total"><td>Total TI</td><td>$300,000</td></tr>
+    </tbody>
+  </table>
+
+  <div class="nav-footer">
+    <a href="01-executive-summary.html" class="nav-btn">← Executive Summary</a>
+    <a href="03-brand-concept.html" class="nav-btn primary">Brand &amp; Concept →</a>
+  </div>
+</div>
+</body>
+</html>
