@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menu — Troppo Buono</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=Barlow+Condensed:wght@300;400;500;600;700&family=Barlow:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --red: #C8102E;
+    --gold: #8B6914;
+    --gold-l: #C9A84C;
+    --dark: #111111;
+    --mid: #333;
+    --soft: #666;
+    --bg: #FAFAF8;
+    --bg2: #F2F0EC;
+    --bg3: #E8E4DC;
+    --border: #D4CFC4;
+    --border-s: #B8B2A4;
+    --cream-dark: #1C1A16;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { background: var(--bg); color: var(--dark); font-family: 'Barlow', sans-serif; }
+
+  /* ── TOPBAR ── */
+  .topbar {
+    background: #111;
+    padding: 16px 40px;
+    display: flex; align-items: center; justify-content: space-between;
+    position: sticky; top: 0; z-index: 100;
+  }
+  .back-link {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gold-l); text-decoration: none;
+  }
+  .back-link:hover { color: #fff; }
+  .topbar-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 18px; font-weight: 900; color: #fff;
+    text-transform: uppercase; letter-spacing: 2px;
+  }
+  .topbar-tag {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    color: rgba(255,255,255,0.35);
+  }
+
+  /* ── MENU HERO ── */
+  .menu-hero {
+    background: var(--cream-dark);
+    padding: 64px 60px 52px;
+    border-bottom: 3px solid var(--red);
+    position: relative;
+    overflow: hidden;
+  }
+  .menu-hero::before {
+    content: 'MENU';
+    position: absolute;
+    font-family: 'Playfair Display', serif;
+    font-size: 220px;
+    font-weight: 900;
+    color: rgba(255,255,255,0.03);
+    right: -20px; top: 50%;
+    transform: translateY(-50%);
+    letter-spacing: -10px;
+    line-height: 1;
+    pointer-events: none;
+  }
+  .menu-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--gold-l); margin-bottom: 16px;
+  }
+  .menu-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(44px, 7vw, 80px);
+    font-weight: 900; line-height: 0.95;
+    text-transform: uppercase; letter-spacing: 2px; color: #fff;
+  }
+  .menu-title em { font-style: italic; color: var(--gold-l); }
+  .menu-subtitle {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 13px; letter-spacing: 4px; text-transform: uppercase;
+    color: rgba(255,255,255,0.4); margin-top: 18px;
+  }
+  .menu-note {
+    margin-top: 28px;
+    font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.6;
+    max-width: 540px;
+    border-left: 2px solid var(--red);
+    padding-left: 16px;
+  }
+
+  /* ── SECTION NAV ── */
+  .section-nav {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    padding: 0 60px;
+    display: flex; gap: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .section-nav::-webkit-scrollbar { display: none; }
+  .sec-nav-link {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--soft); text-decoration: none;
+    padding: 16px 24px; border-bottom: 2px solid transparent;
+    white-space: nowrap; transition: all 0.15s;
+  }
+  .sec-nav-link:hover { color: var(--dark); border-bottom-color: var(--gold); }
+
+  /* ── MAIN LAYOUT ── */
+  .menu-body { max-width: 1100px; margin: 0 auto; padding: 0 40px 80px; }
+
+  /* ── CATEGORY HEADER ── */
+  .cat-header {
+    display: flex; align-items: baseline; gap: 24px;
+    padding: 64px 0 32px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 0;
+  }
+  .cat-header:first-of-type { padding-top: 56px; }
+  .cat-num {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gold); opacity: 0.7;
+  }
+  .cat-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(30px, 4vw, 44px);
+    font-weight: 900; text-transform: uppercase; color: var(--dark);
+    line-height: 1;
+  }
+  .cat-title em { font-style: italic; color: var(--gold); }
+  .cat-desc {
+    font-family: 'Barlow', sans-serif;
+    font-size: 13px; color: var(--soft); margin-left: auto;
+    max-width: 300px; text-align: right; line-height: 1.5;
+  }
+
+  /* ── PIZZA SECTION ── */
+  .pizza-size-header {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    gap: 0;
+    padding: 20px 0 10px;
+    border-bottom: 1px solid var(--border-s);
+    margin-bottom: 0;
+  }
+  .psh-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--soft);
+  }
+  .psh-size {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: var(--soft); width: 80px; text-align: center;
+  }
+
+  .pizza-item {
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    align-items: start;
+    padding: 24px 0;
+    border-bottom: 1px solid var(--border);
+    gap: 0;
+  }
+  .pizza-info { padding-right: 32px; }
+  .pizza-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; font-weight: 700; color: var(--dark);
+    margin-bottom: 6px; line-height: 1.2;
+  }
+  .pizza-desc {
+    font-size: 13px; color: var(--soft); line-height: 1.5;
+  }
+  .pizza-badge {
+    display: inline-block;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+    background: var(--red); color: #fff;
+    padding: 2px 8px; margin-left: 8px; vertical-align: middle;
+  }
+  .pizza-price {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 17px; font-weight: 600; color: var(--dark);
+    width: 80px; text-align: center; padding-top: 2px;
+  }
+
+  /* ── FEATURED PIZZA CARDS ── */
+  .pizza-featured {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    margin: 32px 0;
+  }
+  .pizza-card {
+    background: var(--bg);
+    overflow: hidden;
+  }
+  .pizza-card-img {
+    width: 100%; height: 200px; object-fit: cover;
+    display: block;
+    background: var(--bg3);
+  }
+  .pizza-card-body { padding: 24px; }
+  .pizza-card-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; font-weight: 700; color: var(--dark);
+    margin-bottom: 8px;
+  }
+  .pizza-card-desc { font-size: 13px; color: var(--soft); line-height: 1.55; margin-bottom: 16px; }
+  .pizza-card-footer {
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 1px solid var(--border); padding-top: 14px;
+  }
+  .pizza-card-sizes {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 12px; letter-spacing: 1px; color: var(--soft);
+  }
+  .pizza-card-price {
+    font-family: 'Playfair Display', serif;
+    font-size: 20px; font-weight: 700; color: var(--dark);
+  }
+
+  /* ── APPS / SIDES ── */
+  .items-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    margin: 32px 0;
+  }
+  .item-card {
+    background: var(--bg);
+    display: flex; gap: 0;
+    overflow: hidden;
+  }
+  .item-img {
+    width: 110px; min-width: 110px; height: 110px;
+    object-fit: cover; display: block;
+    background: var(--bg3);
+  }
+  .item-body { padding: 16px 18px; flex: 1; }
+  .item-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px; font-weight: 700; color: var(--dark);
+    margin-bottom: 5px; line-height: 1.2;
+  }
+  .item-desc { font-size: 12px; color: var(--soft); line-height: 1.5; margin-bottom: 10px; }
+  .item-price {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 16px; font-weight: 600; color: var(--dark);
+  }
+
+  /* ── BAR SECTION ── */
+  .bar-intro {
+    background: var(--cream-dark);
+    padding: 40px 48px;
+    margin: 32px 0;
+    display: flex; gap: 40px; align-items: center;
+  }
+  .bar-intro-text { flex: 1; }
+  .bar-intro-eyebrow {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gold-l); margin-bottom: 12px;
+  }
+  .bar-intro-headline {
+    font-family: 'Playfair Display', serif;
+    font-size: 28px; font-weight: 900; color: #fff; line-height: 1.1;
+  }
+  .bar-intro-headline em { font-style: italic; color: var(--gold-l); }
+  .bar-intro-desc { font-size: 13px; color: rgba(255,255,255,0.55); margin-top: 12px; line-height: 1.6; }
+
+  .drinks-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 1px;
+    background: var(--border);
+    margin: 24px 0 0;
+  }
+  .drink-card {
+    background: var(--bg);
+    padding: 22px 20px;
+  }
+  .drink-category {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 8px;
+  }
+  .drink-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 16px; font-weight: 700; color: var(--dark);
+    margin-bottom: 4px; line-height: 1.2;
+  }
+  .drink-desc { font-size: 12px; color: var(--soft); line-height: 1.5; margin-bottom: 10px; }
+  .drink-price {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 15px; font-weight: 600; color: var(--dark);
+  }
+
+  /* ── WINE / BEER TABLE ── */
+  .list-section { margin: 32px 0; }
+  .list-title {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px; letter-spacing: 3px; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 16px;
+    padding-bottom: 10px; border-bottom: 1px solid var(--border);
+  }
+  .list-item {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 11px 0; border-bottom: 1px solid var(--border);
+    gap: 16px;
+  }
+  .list-item-left { flex: 1; }
+  .list-item-name { font-size: 14px; font-weight: 500; color: var(--dark); }
+  .list-item-sub { font-size: 12px; color: var(--soft); margin-top: 2px; }
+  .list-item-price {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 14px; font-weight: 600; color: var(--dark);
+    white-space: nowrap;
+  }
+
+  /* ── DESSERT ── */
+  .dessert-row {
+    display: flex; gap: 1px; background: var(--border); margin: 32px 0;
+  }
+  .dessert-card {
+    flex: 1; background: var(--bg); padding: 28px 24px;
+    border-top: 3px solid transparent;
+    transition: border-color 0.15s;
+  }
+  .dessert-card:hover { border-top-color: var(--gold); }
+  .dessert-name {
+    font-family: 'Playfair Display', serif;
+    font-size: 19px; font-weight: 700; color: var(--dark);
+    margin-bottom: 6px;
+  }
+  .dessert-desc { font-size: 13px; color: var(--soft); line-height: 1.5; margin-bottom: 14px; }
+  .dessert-price {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 16px; font-weight: 600; color: var(--dark);
+  }
+
+  /* ── MARGIN CALLOUT ── */
+  .margin-bar {
+    background: var(--red);
+    padding: 20px 60px;
+    display: flex; gap: 32px; align-items: center; flex-wrap: wrap;
+    margin: 0 -40px;
+  }
+  .margin-stat { flex: 1; min-width: 120px; }
+  .margin-val {
+    font-family: 'Playfair Display', serif;
+    font-size: 26px; font-weight: 700; color: #fff; line-height: 1;
+  }
+  .margin-label {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 10px; letter-spacing: 2px; text-transform: uppercase;
+    color: rgba(255,255,255,0.7); margin-top: 3px;
+  }
+
+  /* ── FOOTER NOTE ── */
+  .menu-footer {
+    text-align: center; padding: 48px 0 0;
+    border-top: 1px solid var(--border); margin-top: 64px;
+  }
+  .menu-footer-brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px; font-weight: 900; text-transform: uppercase;
+    color: var(--dark); letter-spacing: 2px;
+  }
+  .menu-footer-brand em { font-style: italic; color: var(--gold); }
+  .menu-footer-tag {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 11px; letter-spacing: 4px; text-transform: uppercase;
+    color: var(--soft); margin-top: 8px;
+  }
+  .menu-footer-note {
+    font-size: 12px; color: var(--soft); margin-top: 20px; line-height: 1.7;
+  }
+
+  @media (max-width: 700px) {
+    .topbar { padding: 14px 20px; }
+    .menu-hero { padding: 48px 24px 40px; }
+    .section-nav { padding: 0 20px; }
+    .menu-body { padding: 0 20px 60px; }
+    .cat-header { flex-direction: column; gap: 8px; }
+    .cat-desc { margin-left: 0; text-align: left; }
+    .pizza-size-header { grid-template-columns: 1fr 70px 70px; }
+    .pizza-item { grid-template-columns: 1fr 70px 70px; }
+    .pizza-price { width: 70px; font-size: 15px; }
+    .items-grid { grid-template-columns: 1fr; }
+    .dessert-row { flex-direction: column; }
+    .bar-intro { flex-direction: column; padding: 32px 24px; }
+    .margin-bar { padding: 20px 24px; }
+    .pizza-featured { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- TOPBAR -->
+<div class="topbar">
+  <a href="index.html" class="back-link">← Back to Overview</a>
+  <div style="text-align:center;">
+    <div class="topbar-brand">Troppo Buono</div>
+  </div>
+  <div class="topbar-tag">The Menu</div>
+</div>
+
+<!-- HERO -->
+<div class="menu-hero">
+  <div class="menu-eyebrow">50285 Mound Road · Shelby Township, MI</div>
+  <div class="menu-title">The <em>Menu</em></div>
+  <div class="menu-subtitle">New York–Style Thin Crust Pizzeria &amp; Full Bar</div>
+  <div class="menu-note">
+    Every pizza is hand-stretched to order. Thin crust. Deck-fired. We don't rush it and we don't cut corners. If it's not exceptional, it's not Troppo Buono.
+  </div>
+</div>
+
+<!-- SECTION NAV -->
+<div class="section-nav">
+  <a href="#pizzas" class="sec-nav-link">Pizzas</a>
+  <a href="#starters" class="sec-nav-link">Starters</a>
+  <a href="#salads" class="sec-nav-link">Salads</a>
+  <a href="#bar" class="sec-nav-link">Bar</a>
+  <a href="#wine" class="sec-nav-link">Wine</a>
+  <a href="#beer" class="sec-nav-link">Beer</a>
+  <a href="#dessert" class="sec-nav-link">Dessert</a>
+</div>
+
+<div class="menu-body">
+
+  <!-- ══════════════════════════════════════
+       PIZZAS
+  ══════════════════════════════════════ -->
+  <div id="pizzas" class="cat-header">
+    <div class="cat-num">01</div>
+    <div class="cat-title">Our <em>Pizzas</em></div>
+    <div class="cat-desc">Hand-stretched to order. Available in 12" personal or 18" large. New York–style thin crust — crisp on the bottom, foldable at the tip.</div>
+  </div>
+
+  <!-- Featured pizzas with photos -->
+  <div class="pizza-featured">
+
+    <div class="pizza-card">
+      <img class="pizza-card-img"
+        src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=600&q=80&fit=crop"
+        alt="Margherita pizza" loading="lazy">
+      <div class="pizza-card-body">
+        <div class="pizza-card-name">The Margherita</div>
+        <div class="pizza-card-desc">San Marzano tomato, fresh fior di latte mozzarella, basil, extra virgin olive oil. The standard by which everything else is judged.</div>
+        <div class="pizza-card-footer">
+          <div class="pizza-card-sizes">12" · 18"</div>
+          <div class="pizza-card-price">$16 · $24</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pizza-card">
+      <img class="pizza-card-img"
+        src="https://images.unsplash.com/photo-1628840042765-356cda07504e?w=600&q=80&fit=crop"
+        alt="Pepperoni pizza" loading="lazy">
+      <div class="pizza-card-body">
+        <div class="pizza-card-name">The Pepperoni <span class="pizza-badge">Best Seller</span></div>
+        <div class="pizza-card-desc">San Marzano tomato, whole milk mozzarella, cup-and-char pepperoni. Old-school cupping. Crispy edges.</div>
+        <div class="pizza-card-footer">
+          <div class="pizza-card-sizes">12" · 18"</div>
+          <div class="pizza-card-price">$18 · $27</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="pizza-card">
+      <img class="pizza-card-img"
+        src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?w=600&q=80&fit=crop"
+        alt="Truffle pizza" loading="lazy">
+      <div class="pizza-card-body">
+        <div class="pizza-card-name">The Bianca</div>
+        <div class="pizza-card-desc">No red sauce. Ricotta, whole milk mozz, roasted garlic, fresh thyme, black pepper, finished with truffle oil.</div>
+        <div class="pizza-card-footer">
+          <div class="pizza-card-sizes">12" · 18"</div>
+          <div class="pizza-card-price">$19 · $28</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Full pizza list -->
+  <div class="pizza-size-header">
+    <div class="psh-label">Pizza</div>
+    <div class="psh-size">12"</div>
+    <div class="psh-size">18"</div>
+  </div>
+
+  <div class="pizza-item">
+    <div class="pizza-info">
+      <div class="pizza-name">The Margherita</div>
+      <div class="pizza-desc">San Marzano tomato · fior di latte mozz · basil · EVOO</div>
+    </div>
+    <div class="pizza-price">$16</div>
+    <div class="pizza-price">$24</div>
+  </div>
+
+  <div class="pizza-item">
+    <div class="pizza-info">
+      <div class="pizza-name">The Pepperoni <span class="pizza-badge">Best Seller</span></div>
+      <div class="pizza-desc">San Marzano tomato · whole milk mozz · cup-and-char pepperoni</div>
+    </div>
+    <div class="pizza-price">$18</div>
+    <div class="pizza-price">$27</div>
+  </div>
+
+  <div class="pizza-item">
+    <div class="pizza-info">
+      <div class="pizza-name">The Bianca</div>
+      <div class="pizza-desc">Ricotta · whole milk mozz · roasted garlic · thyme · truffle oil</div>
+    </div>
+    <div class="pizza-price">$19</div>
+    <div class="pizza-price">$28</div>
+  </div>
+
+  <div class="pizza-item">
+    <div class="pizza-info">
+      <div class="pizza-name">The Sausage &amp; Fennel</div>
+      <div class="pizza-desc">San Marzano tomato · mozz · Italian sausage · shaved fennel · Calabrian chili</div>
+    </div>
+    <div class="pizza-price">$19</div>
+    <div class="pizza-price">$28</div>
+  </div>
+
+  <div class="pizza-item">
+    <div class="pizza-info">
+      <div class="pizza-name">The Meat</div>
+      <div class="pizza-desc">Tomato · mozz · pepperoni · sausage · bacon · roasted red pepper</div>
+    </div>
+    <div class="pizza-price">$21</div>
+    <div class="pizza-price">$31</div>
+  </div>
+
+  <div class="pizza-item">
+    <div class="pizza-info">
+      <div class="pizza-name">The Garden</div>
+      <div class="pizza-desc">Tomato · mozz · roasted zucchini · red onion · cherry tomato · fresh basil · balsamic</div>
+    </div>
+    <div class="pizza-price">$18</div>
+    <div class="pizza-price">$26</div>
+  </div>
+
+  <div class="pizza-item">
+    <div class="pizza-info">
+      <div class="pizza-name">The Arrabbiata</div>
+      <div class="pizza-desc">Spicy San Marzano tomato · mozz · sopressata · Calabrian chili · honey drizzle</div>
+    </div>
+    <div class="pizza-price">$20</div>
+    <div class="pizza-price">$29</div>
+  </div>
+
+  <div class="pizza-item">
+    <div class="pizza-info">
+      <div class="pizza-name">Build Your Own</div>
+      <div class="pizza-desc">Tomato or bianca base · whole milk mozz · choose up to 3 toppings <span style="color:#999; font-size:12px;">· $1.50 ea additional</span></div>
+    </div>
+    <div class="pizza-price">$15</div>
+    <div class="pizza-price">$22</div>
+  </div>
+
+  <div style="padding: 14px 0; font-size: 12px; color: var(--soft);">
+    <strong style="color:var(--dark);">Toppings:</strong> Pepperoni · Sausage · Bacon · Ham · Mushroom · Roasted Red Pepper · Red Onion · Black Olive · Jalapeño · Artichoke · Ricotta · Anchovies
+  </div>
+
+
+  <!-- ══════════════════════════════════════
+       STARTERS
+  ══════════════════════════════════════ -->
+  <div id="starters" class="cat-header">
+    <div class="cat-num">02</div>
+    <div class="cat-title"><em>Starters</em></div>
+    <div class="cat-desc">Designed to pair with the bar. High-margin. Fast out of the kitchen. No table-side preparation.</div>
+  </div>
+
+  <div class="items-grid">
+
+    <div class="item-card">
+      <img class="item-img"
+        src="https://images.unsplash.com/photo-1573821663912-569905455b1c?w=300&q=80&fit=crop"
+        alt="Garlic knots" loading="lazy">
+      <div class="item-body">
+        <div class="item-name">Dough Balls</div>
+        <div class="item-desc">Six hand-rolled dough balls, deck-baked, brushed with garlic butter, finished with parm and parsley. Served with marinara.</div>
+        <div class="item-price">$9</div>
+      </div>
+    </div>
+
+    <div class="item-card">
+      <img class="item-img"
+        src="https://images.unsplash.com/photo-1541014741259-de529411b96a?w=300&q=80&fit=crop"
+        alt="Mozzarella sticks" loading="lazy">
+      <div class="item-body">
+        <div class="item-name">Fried Mozzarella</div>
+        <div class="item-desc">Hand-breaded whole milk mozz, fried to order. Crisp outside, pull-apart inside. Marinara for dipping.</div>
+        <div class="item-price">$11</div>
+      </div>
+    </div>
+
+    <div class="item-card">
+      <img class="item-img"
+        src="https://images.unsplash.com/photo-1572695157366-5e585ab2b69f?w=300&q=80&fit=crop"
+        alt="Bruschetta" loading="lazy">
+      <div class="item-body">
+        <div class="item-name">Bruschetta</div>
+        <div class="item-desc">Toasted house bread, fresh tomato, basil, garlic, EVOO, aged balsamic. Simple. Perfect.</div>
+        <div class="item-price">$10</div>
+      </div>
+    </div>
+
+    <div class="item-card">
+      <img class="item-img"
+        src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=300&q=80&fit=crop"
+        alt="Wings" loading="lazy">
+      <div class="item-body">
+        <div class="item-name">Wings</div>
+        <div class="item-desc">8 crispy wings. Choice of: classic buffalo, honey Calabrian, garlic parm, or dry rub. Celery and house ranch.</div>
+        <div class="item-price">$14</div>
+      </div>
+    </div>
+
+    <div class="item-card">
+      <img class="item-img"
+        src="https://images.unsplash.com/photo-1550304943-4f24f54ddde9?w=300&q=80&fit=crop"
+        alt="Charcuterie board" loading="lazy">
+      <div class="item-body">
+        <div class="item-name">Italian Board</div>
+        <div class="item-desc">Sopressata, prosciutto, fresh mozz, marinated olives, roasted peppers, house crostini. Built for the bar.</div>
+        <div class="item-price">$18</div>
+      </div>
+    </div>
+
+    <div class="item-card">
+      <img class="item-img"
+        src="https://images.unsplash.com/photo-1602030638412-bb8dcc0bc8b0?w=300&q=80&fit=crop"
+        alt="Soup" loading="lazy">
+      <div class="item-body">
+        <div class="item-name">Tomato Bisque</div>
+        <div class="item-desc">House-made San Marzano tomato bisque, finished with cream and basil oil. A cup or a bowl. Served with house bread.</div>
+        <div class="item-price">Cup $6 · Bowl $9</div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- ══════════════════════════════════════
+       SALADS
+  ══════════════════════════════════════ -->
+  <div id="salads" class="cat-header">
+    <div class="cat-num">03</div>
+    <div class="cat-title"><em>Salads</em></div>
+    <div class="cat-desc">Kept tight. Two options. Both honest. Add grilled chicken +$5.</div>
+  </div>
+
+  <div class="items-grid">
+
+    <div class="item-card">
+      <img class="item-img"
+        src="https://images.unsplash.com/photo-1607532941433-304659e8198a?w=300&q=80&fit=crop"
+        alt="Caesar salad" loading="lazy">
+      <div class="item-body">
+        <div class="item-name">Caesar</div>
+        <div class="item-desc">Chopped romaine, shaved parm, house croutons, classic Caesar dressing made in-house. No shortcuts.</div>
+        <div class="item-price">$12</div>
+      </div>
+    </div>
+
+    <div class="item-card">
+      <img class="item-img"
+        src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=300&q=80&fit=crop"
+        alt="Italian salad" loading="lazy">
+      <div class="item-body">
+        <div class="item-name">Italian Chop</div>
+        <div class="item-desc">Romaine, salami, pepperoncini, chickpeas, red onion, cherry tomato, provolone, Italian vinaigrette.</div>
+        <div class="item-price">$13</div>
+      </div>
+    </div>
+
+  </div>
+
+
+  <!-- ══════════════════════════════════════
+       BAR
+  ══════════════════════════════════════ -->
+  <div id="bar" class="cat-header">
+    <div class="cat-num">04</div>
+    <div class="cat-title">The <em>Bar</em></div>
+    <div class="cat-desc">Full bar. Cocktails built for pairing with pizza. Priced to drive attach rate and margin.</div>
+  </div>
+
+  <div class="bar-intro">
+    <div class="bar-intro-text">
+      <div class="bar-intro-eyebrow">Full Bar · Shelby Township</div>
+      <div class="bar-intro-headline">Pizza &amp; a<br><em>Proper Drink</em></div>
+      <div class="bar-intro-desc">The bar at Troppo Buono exists to make the pizza better. Drinks are built to pair — acidic, refreshing, and bold enough to stand next to a proper slice.</div>
+    </div>
+  </div>
+
+  <div class="drinks-grid">
+
+    <div class="drink-card">
+      <div class="drink-category">Signature Cocktail</div>
+      <div class="drink-name">The Arrabbiata Mule</div>
+      <div class="drink-desc">House pepper-infused vodka, fresh lime, ginger beer, Calabrian chili tincture. A mule with heat.</div>
+      <div class="drink-price">$13</div>
+    </div>
+
+    <div class="drink-card">
+      <div class="drink-category">Signature Cocktail</div>
+      <div class="drink-name">Basil Spritz</div>
+      <div class="drink-desc">Aperol, fresh basil, prosecco, soda. Light, aromatic, built for the patio.</div>
+      <div class="drink-price">$13</div>
+    </div>
+
+    <div class="drink-card">
+      <div class="drink-category">Signature Cocktail</div>
+      <div class="drink-name">Negroni Bianco</div>
+      <div class="drink-desc">Gin, Lillet Blanc, Suze, lemon twist. Bitter, complex, pairs beautifully with any bianca pie.</div>
+      <div class="drink-price">$14</div>
+    </div>
+
+    <div class="drink-card">
+      <div class="drink-category">Signature Cocktail</div>
+      <div class="drink-name">Limoncello Fizz</div>
+      <div class="drink-desc">House limoncello, vodka, fresh lemon, prosecco. Refreshing and high-margin.</div>
+      <div class="drink-price">$12</div>
+    </div>
+
+    <div class="drink-card">
+      <div class="drink-category">Classic</div>
+      <div class="drink-name">Old Fashioned</div>
+      <div class="drink-desc">Bourbon, house demerara, Angostura, orange peel. Done right.</div>
+      <div class="drink-price">$13</div>
+    </div>
+
+    <div class="drink-card">
+      <div class="drink-category">Classic</div>
+      <div class="drink-name">Classic Martini</div>
+      <div class="drink-desc">Your choice of gin or vodka, dry vermouth, olive or twist. Shaken or stirred.</div>
+      <div class="drink-price">$14</div>
+    </div>
+
+    <div class="drink-card">
+      <div class="drink-category">Non-Alcoholic</div>
+      <div class="drink-name">San Pellegrino</div>
+      <div class="drink-desc">Limonata, Aranciata, or Sparkling Water. Italian table staple.</div>
+      <div class="drink-price">$4</div>
+    </div>
+
+    <div class="drink-card">
+      <div class="drink-category">Non-Alcoholic</div>
+      <div class="drink-name">Soft Drinks</div>
+      <div class="drink-desc">Coke, Diet Coke, Sprite, lemonade, iced tea. Free refills.</div>
+      <div class="drink-price">$3</div>
+    </div>
+
+  </div>
+
+
+  <!-- ══════════════════════════════════════
+       WINE
+  ══════════════════════════════════════ -->
+  <div id="wine" class="cat-header">
+    <div class="cat-num">05</div>
+    <div class="cat-title"><em>Wine</em></div>
+    <div class="cat-desc">Italian-forward. Priced to sell by the glass every night, not just on special occasions.</div>
+  </div>
+
+  <div class="list-section">
+    <div class="list-title">By the Glass · By the Bottle</div>
+    <div class="list-item">
+      <div class="list-item-left">
+        <div class="list-item-name">Pinot Grigio — Cavit, Trentino</div>
+        <div class="list-item-sub">Crisp, light, dry. The pizza wine.</div>
+      </div>
+      <div class="list-item-price">$9 / $32</div>
+    </div>
+    <div class="list-item">
+      <div class="list-item-left">
+        <div class="list-item-name">Prosecco — La Marca, Veneto</div>
+        <div class="list-item-sub">Dry, fine bubbles. Perfect with a Margherita.</div>
+      </div>
+      <div class="list-item-price">$10 / $36</div>
+    </div>
+    <div class="list-item">
+      <div class="list-item-left">
+        <div class="list-item-name">Chianti Classico — Rocca delle Macìe</div>
+        <div class="list-item-sub">Cherry, leather, light tannin. Red sauce's best friend.</div>
+      </div>
+      <div class="list-item-price">$11 / $40</div>
+    </div>
+    <div class="list-item">
+      <div class="list-item-left">
+        <div class="list-item-name">Barolo — Vietti, Piedmont</div>
+        <div class="list-item-sub">Bold, tannic, earthy. For the meat pizza. The king of Italian reds.</div>
+      </div>
+      <div class="list-item-price">$16 / $58</div>
+    </div>
+    <div class="list-item">
+      <div class="list-item-left">
+        <div class="list-item-name">Montepulciano d'Abruzzo — Zaccagnini</div>
+        <div class="list-item-sub">Full-bodied, dark fruit, smooth finish. Crowd pleaser.</div>
+      </div>
+      <div class="list-item-price">$10 / $36</div>
+    </div>
+    <div class="list-item">
+      <div class="list-item-left">
+        <div class="list-item-name">Rosé — Miraval, Provence</div>
+        <div class="list-item-sub">Dry, pale, delicate. The patio wine.</div>
+      </div>
+      <div class="list-item-price">$11 / $40</div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════
+       BEER
+  ══════════════════════════════════════ -->
+  <div id="beer" class="cat-header">
+    <div class="cat-num">06</div>
+    <div class="cat-title"><em>Beer</em></div>
+    <div class="cat-desc">Draft and bottle. Rotating Michigan craft tap. Always one crisp Italian lager on draft.</div>
+  </div>
+
+  <div class="list-section">
+    <div class="list-title">Draft</div>
+    <div class="list-item">
+      <div class="list-item-left">
+        <div class="list-item-name">Peroni Nastro Azzurro</div>
+        <div class="list-item-sub">Italian lager · always on · 16oz</div>
+      </div>
+      <div class="list-item-price">$7</div>
+    </div>
+    <div class="list-item">
+      <div class="list-item-left">
+        <div class="list-item-name">Michigan Craft Rotating Tap</div>
+        <div class="list-item-sub">Ask your server — local, seasonal, changes weekly · 16oz</div>
+      </div>
+      <div class="list-item-price">$8</div>
+    </div>
+    <div class="list-item">
+      <div class="list-item-left">
+        <div class="list-item-name">Second Rotating Tap</div>
+        <div class="list-item-sub">Always something interesting · 16oz</div>
+      </div>
+      <div class="list-item-price">$8</div>
+    </div>
+  </div>
+
+  <div class="list-section">
+    <div class="list-title">Bottle &amp; Can</div>
+    <div class="list-item">
+      <div class="list-item-left"><div class="list-item-name">Moretti</div><div class="list-item-sub">Italian lager · 12oz bottle</div></div>
+      <div class="list-item-price">$5</div>
+    </div>
+    <div class="list-item">
+      <div class="list-item-left"><div class="list-item-name">Stella Artois</div><div class="list-item-sub">Belgian lager · 12oz bottle</div></div>
+      <div class="list-item-price">$5</div>
+    </div>
+    <div class="list-item">
+      <div class="list-item-left"><div class="list-item-name">Bud Light / Coors Light / Miller Lite</div><div class="list-item-sub">Domestic · 12oz bottle</div></div>
+      <div class="list-item-price">$4</div>
+    </div>
+    <div class="list-item">
+      <div class="list-item-left"><div class="list-item-name">Athletic Brewing — Run Wild IPA</div><div class="list-item-sub">Non-alcoholic craft · 12oz can</div></div>
+      <div class="list-item-price">$5</div>
+    </div>
+  </div>
+
+
+  <!-- ══════════════════════════════════════
+       DESSERT
+  ══════════════════════════════════════ -->
+  <div id="dessert" class="cat-header">
+    <div class="cat-num">07</div>
+    <div class="cat-title"><em>Dessert</em></div>
+    <div class="cat-desc">Three options. No more. High-margin, sourced or minimal prep. Finish strong.</div>
+  </div>
+
+  <div class="dessert-row">
+    <div class="dessert-card">
+      <div class="dessert-name">Cannoli</div>
+      <div class="dessert-desc">Two Sicilian cannoli, filled to order with sweetened ricotta and mini chocolate chips. Dusted with powdered sugar.</div>
+      <div class="dessert-price">$8</div>
+    </div>
+    <div class="dessert-card">
+      <div class="dessert-name">Tiramisu</div>
+      <div class="dessert-desc">House-made. Espresso-soaked ladyfingers, mascarpone cream, cocoa dust. Made in full pans, portioned per shift.</div>
+      <div class="dessert-price">$9</div>
+    </div>
+    <div class="dessert-card">
+      <div class="dessert-name">Nutella Pizza</div>
+      <div class="dessert-desc">12" dessert flatbread, Nutella, sliced strawberries, powdered sugar, drizzle of honey. Shareable. High-attach.</div>
+      <div class="dessert-price">$14</div>
+    </div>
+  </div>
+
+</div><!-- /menu-body -->
+
+<!-- MARGIN BAR — internal investor note -->
+<div class="margin-bar">
+  <div class="margin-stat"><div class="margin-val">22%</div><div class="margin-label">Food &amp; Bev Cost Target</div></div>
+  <div class="margin-stat"><div class="margin-val">~$28</div><div class="margin-label">Avg Guest Ticket</div></div>
+  <div class="margin-stat"><div class="margin-val">16</div><div class="margin-label">Total SKUs</div></div>
+  <div class="margin-stat"><div class="margin-val">Zero</div><div class="margin-label">Table-Side Prep Required</div></div>
+  <div class="margin-stat"><div class="margin-val">1 Station</div><div class="margin-label">Kitchen Line Complexity</div></div>
+</div>
+
+<div class="menu-body">
+  <div class="menu-footer">
+    <div class="menu-footer-brand">Troppo <em>Buono</em></div>
+    <div class="menu-footer-tag">It's Too Good · Shelby Township, MI</div>
+    <div class="menu-footer-note">
+      Menu and pricing subject to change prior to opening.<br>
+      Please inform your server of any allergies. Consuming raw or undercooked meats may increase risk of foodborne illness.
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
